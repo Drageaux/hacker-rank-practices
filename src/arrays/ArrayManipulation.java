@@ -12,24 +12,35 @@ public class ArrayManipulation {
         // queries[index][0] = first number
         // queries[index][1] = second number
         // queries[index][1] = added value
-        int[] finalArray = new int[n];
+        int[] finalArray = new int[n + 1];
+        int largest = 0;
 
         for (int[] query : queries) {
 
-            for (int i = query[0]; i < query[1] + 1; i++) {
-                int addedVal = query[2];
-                print(query);
-                finalArray[i-1] += addedVal;
-            }
-        }
+            int addedVal = query[2];
+            int startInd = query[0];
+            int endInd = query[1];
 
-        int largest = 0;
-        for (int i : finalArray){
-            if (i > largest) largest = i;
+            finalArray[startInd-1] += addedVal;
+            finalArray[endInd] -=addedVal;
         }
+        long max=0;
+        long temp=0;
 
-        return largest;
+        for(int i=0;i<n;i++){
+            temp += finalArray[i];
+            if(temp> max) max=temp;
+        }
+        return max;
+
     }
+
+    // static void print(int[] arr) {
+    //     for (int i : arr) {
+    //         System.out.print(Integer.toString(i) + " ");
+    //     }
+    //     System.out.println();
+    // }
 
     static void print(int[] arr) {
         for (int i : arr) {
